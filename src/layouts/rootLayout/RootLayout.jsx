@@ -15,8 +15,10 @@ const RootLayout = () => {
       <div className='rootLayout'>
         <header>
           <Link to='/'>
-            <img src='/logo.png' alt='logo' />
-            <span>PromptLab AI</span>
+            <div className='logo'>
+              <img src='/logo.png' alt='logo' />
+              <span>PromptLab AI</span>
+            </div>
           </Link>
           <div className='user'>
             <SignedOut>
