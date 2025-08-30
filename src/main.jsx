@@ -6,6 +6,9 @@ import RootLayout from './layouts/rootLayout/RootLayout'
 import Homepage from './routes/homepage/Homepage'
 import ChatPage from './routes/chatPage/ChatPage'
 import DashboardPage from './routes/dashboardPage/DashboardPage'
+import DashboardLayout from './layouts/dashboardLayout/DashboardLayout'
+import SignInPage from './routes/signInPage/SignInPage'
+import { SignUpPage } from './routes/signUpPage/SignUpPage'
 
 // Import your Publishable Key
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY
@@ -23,7 +26,15 @@ const router = createBrowserRouter([
         element: <Homepage />,
       },
       {
-        path: '/dashboard',
+        path: '/sign-in/*',
+        element: <SignInPage />,
+      },
+      {
+        path: '/sign-up/*',
+        element: <SignUpPage />,
+      },
+      {
+        element: <DashboardLayout />,
         children: [
           { path: '/dashboard', element: <DashboardPage /> },
           { path: '/dashboard/chats/:id', element: <ChatPage /> },
