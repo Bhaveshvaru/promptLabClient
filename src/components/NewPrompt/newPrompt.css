@@ -1,13 +1,17 @@
+.endChat {
+  padding-bottom: 100px;
+}
 .newForm {
   width: 50%;
   position: absolute;
-  background-color: #2c2937;
   bottom: 0;
+  background-color: #2c2937;
   border-radius: 20px;
   display: flex;
   align-items: center;
   gap: 20px;
   padding: 0px 20px;
+
   input {
     flex: 1;
     padding: 20px;
@@ -16,23 +20,21 @@
     background-color: transparent;
     color: #ececec;
   }
-  label,
-  button {
+
+  button,
+  label {
     border-radius: 50%;
     background-color: #605e68;
-    padding: 10px;
     border: none;
+    padding: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
+
     img {
       width: 16px;
       height: 16px;
     }
   }
-}
-
-.endChat {
-  padding-bottom: 50px;
 }
