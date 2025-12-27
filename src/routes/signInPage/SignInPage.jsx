@@ -1,9 +1,15 @@
 import { SignIn } from '@clerk/clerk-react'
-import './SignInPage.css'
 
 const SignInPage = () => {
   return (
-    <div className='signInPage'>
+    <div
+      style={{
+        height: '100%',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
       <SignIn
         path='/sign-in'
         signUpUrl='/sign-up'
