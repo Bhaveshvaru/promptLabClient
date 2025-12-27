@@ -4,20 +4,40 @@ import { useQuery } from '@tanstack/react-query'
 import { useLocation } from 'react-router-dom'
 import Markdown from 'react-markdown'
 import { IKImage } from 'imagekitio-react'
-
+import { useAuth } from '@clerk/clerk-react'
 const ChatPage = () => {
   const path = useLocation().pathname
   const chatId = path.split('/').pop()
 
+  const { getToken } = useAuth()
+
   const { isPending, error, data } = useQuery({
     queryKey: ['chat', chatId],
-    queryFn: () =>
-      fetch(`${import.meta.env.VITE_API_URL}/api/chats/${chatId}`, {
-        credentials: 'include',
-      }).then((res) => res.json()),
-  })
+    queryFn: async () => {
+      // 1. Get the token from Clerk
+      const token = await getToken()
 
-  console.log(data)
+      // 2. Add the token to the Authorization header
+      const res = await fetch(
+        `${import.meta.env.VITE_API_URL}/api/chats/${chatId}`,
+        {
+          method: 'GET',
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          },
+          // You can remove credentials: 'include' if you aren't using custom cookies
+        }
+      )
+
+      if (!res.ok) {
+        throw new Error('Network response was not ok')
+      }
+
+      return res.json()
+    },
+    enabled: !!chatId, // Only run the query if chatId exists
+  })
 
   return (
     <div className='chatPage'>
